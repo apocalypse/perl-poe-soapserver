@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use strict; use warnings;
 
 # Include the local directory to LIB
 use FindBin qw($Bin);

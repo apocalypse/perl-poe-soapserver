@@ -21,11 +21,18 @@ my $build = Module::Build->new(
 	'requires'		=> {
 		# Networking
 		'POE'					=> 0,
-		'POE::Component::Server::SimpleHTTP'	=> '1.10',
+		'POE::Component::Server::SimpleHTTP'	=> '1.54',	# bump version so we fix CLOSE issue
 		'SOAP::Lite'				=> '0.55',
+
+		# FIXME stupid deps Test::Dependencies needs to see
+		'POE::Session'				=> 0,
+		'SOAP::Constants'			=> 0,
 
 		# Perl stuff
 		'Carp'		=> 0,
+
+		# minimum perl version
+		'perl'		=> '5.006',
 	},
 );
 

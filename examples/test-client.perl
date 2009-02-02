@@ -1,6 +1,5 @@
 #!/usr/bin/perl
-
-use warnings;
+use strict; use warnings;
 
 use SOAP::Lite;
 use Data::Dumper qw( Dumper );

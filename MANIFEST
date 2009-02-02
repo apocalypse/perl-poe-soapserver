@@ -5,12 +5,12 @@ Makefile.PL
 README
 lib/POE/Component/Server/SOAP.pm
 lib/POE/Component/Server/SOAP/Response.pm
-examples/test-client.perl
-examples/test-server.perl
 META.yml
 Changes
 LICENSE
 
+examples/test-client.perl
+examples/test-server.perl
 
-t/01_load.t
+t/1_load.t
 t/apocalypse.t

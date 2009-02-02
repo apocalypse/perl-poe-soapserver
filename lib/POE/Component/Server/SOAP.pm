@@ -10,10 +10,12 @@ use Carp qw(croak);
 
 # Import the proper POE stuff
 use POE;
+use POE::Session;
 use POE::Component::Server::SimpleHTTP;
 
 # We need SOAP stuff
 use SOAP::Lite;
+use SOAP::Constants;
 
 # Our own modules
 use POE::Component::Server::SOAP::Response;
@@ -531,7 +533,7 @@ sub TransactionStart {
 
 	# Actually parse the SOAP query!
 	my $som_object;
-	eval { $som_object = SOAP::Deserializer->deserialize( $request->content() ) };
+	eval { $som_object = SOAP::Deserializer->deserialize( $request->content() ) };	## no critic ( RequireExplicitInclusion )
 
 	# Check for errors
 	if ( $@ ) {
@@ -562,7 +564,7 @@ sub TransactionStart {
 	my @headers = ();
 	while ( 1 ) {
 		# Get the header
-		my $hdr = $som_object->headerof( SOAP::SOM::header . "/[$head_count]" );
+		my $hdr = $som_object->headerof( SOAP::SOM::header . "/[$head_count]" );	## no critic ( RequireExplicitInclusion )
 
 		# Check if it is defined
 		if ( ! defined $hdr ) {
@@ -657,6 +659,7 @@ sub TransactionFault {
 	my $content = undef;
 	if ( $_[STATE] eq 'RAWFAULT' ) {
 		# Tell SOAP::Serializer to not serialize it
+		## no critic ( RequireExplicitInclusion )
 		$content = SOAP::Serializer->envelope( 'freeform', SOAP::Data->type( 'xml', $response->content() ) );
 	} else {
 		# Fault Code must be defined
@@ -682,6 +685,7 @@ sub TransactionFault {
 		}
 
 		# Serialize the envelope
+		## no critic ( RequireExplicitInclusion )
 		$content = SOAP::Serializer->envelope( 'fault', $fault_code, $fault_string, $fault_detail, $fault_actor );
 	}
 
@@ -715,6 +719,7 @@ sub TransactionDone {
 
 	# Make the envelope!
 	# The prefix is to change the darned "c-gensym3" to "s-gensym3" -> means it was server-generated ( whatever SOAP::Lite says... )
+	## no critic ( RequireExplicitInclusion )
 	my $content = SOAP::Serializer->prefix( 's' )->envelope(
 		'response',
 		SOAP::Data->name( $response->soapmethod() . 'Response' )->uri( $response->soapuri() ),
@@ -722,6 +727,7 @@ sub TransactionDone {
 		# Do we need to serialize the content or not?
 		( $_[STATE] eq 'RAWDONE' ? SOAP::Data->type( 'xml', $response->content() ) : $response->content() ),
 	);
+	## use critic
 
 	# Set up the response!
 	if ( ! defined $response->code ) {
