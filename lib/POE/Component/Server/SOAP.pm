@@ -1259,7 +1259,9 @@ L<SOAP::Lite>
 
 L<POE::Component::SSLify>
 
-=head1 CREDITS
+=head1 AUTHOR
+
+Apocalypse E<lt>apocal@cpan.orgE<gt>
 
 I took over this module from Rocco Caputo. Here is his stuff:
 
