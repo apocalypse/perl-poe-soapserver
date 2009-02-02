@@ -1,5 +1,11 @@
 Revision history for Perl extension POE::Component::Server::SOAP.
 
+* 1.14
+
+	Converted to Build.PL
+	Removed stupid Test::* module requirements, thanks BiNGOs!
+	revamped test suite to modernize it
+
 * 1.13
 
 	removed Test::* modules from dependency list - thanks RT #36725
